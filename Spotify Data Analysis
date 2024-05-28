@@ -1,0 +1,55 @@
+-- In this project, I analyzed a table containing data on the top spotify songs..
+
+#Creating the table: 
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+)
+
+-- Below are a series of questions I used to create SQLs to query the database.
+
+-- Question #1: How does a song's "loudness" influence its popularity and ranking?
+
+SELECT round(avg(loudness))
+FROM BIT_DB.Spotifydata
+
+-- I created the above query to find the average amount of loudness for a frame of reference.
+
+SELECT id, track_name, popularity, loudness
+FROM BIT_DB.Spotifydata
+ORDER BY popularity desc
+
+
+-- Question #2: In what way, if any, does a song's danceability and energy correlate?
+
+SELECT round(danceability, 2) as danceability, round(energy,2) as energy
+FROM BIT_DB.Spotifydata
+
+-- Question #3: What artists have mulitiple songs in the top 48 songs?
+
+SELECT artist_name
+FROM BIT_DB.Spotifydata
+ORDER BY artist_name asc
+
+-- Question #4: How does a song's "song key" correspond to its ranking?
+
+SELECT id, track_name, song_key
+FROM BIT_DB.Spotifydata
+ORDER BY song_key desc
+  
